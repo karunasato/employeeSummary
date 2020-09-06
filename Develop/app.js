@@ -37,6 +37,56 @@ function makeManager(){
     setTimeout(createTeam, 2000)
 })
 }
+function makeEngineer(){
+    inquirer.prompt([
+        {
+            message:"What is their name?",
+            name: "name"
+        },
+        {
+            message: "What is their id number?",
+            name: "id"
+        },
+        {
+            message:"What is their email?",
+            name: "email"
+        },
+        {
+            message: "What is their github?",
+            name: "github"
+        }
+]).then(data=> {
+    const emp = new Engineer(data.name, data.id, data.email,data.github);
+    team.push(emp);
+    console.log("Engineer created successfully!, here's your current team - ", team)
+    setTimeout(createTeam, 2000)
+})
+}
+function makeIntern(){
+    inquirer.prompt([
+        {
+            message:"What is their name?",
+            name: "name"
+        },
+        {
+            message: "What is their id number?",
+            name: "id"
+        },
+        {
+            message:"What is their email?",
+            name: "email"
+        },
+        {
+            message: "What school did they go to?",
+            name: "school"
+        }
+]).then(data=> {
+    const emp = new Intern(data.name, data.id, data.email,data.school);
+    team.push(emp);
+    console.log("Intern created successfully!, here's your current team - ", team)
+    setTimeout(createTeam, 2000)
+})
+}
 
 function createTeam(){
     inquirer
@@ -49,13 +99,15 @@ function createTeam(){
   .then(answers => {
     switch(answers.type){
         case "Manager":
-            //do this if answer.type === "Manager"
+            answers.officeNumber//do this if answer.type === "Manager"
         makeManager();
         break;
         case "Engineer":
+            answers.github
         makeEngineer();
         break;
         case "Intern":
+            answers.school
         makeIntern();
         break;
         default:
@@ -71,6 +123,7 @@ function createTeam(){
       // Something else when wrong
     }
   });
+  
 }
 
 function makeTeam(){
